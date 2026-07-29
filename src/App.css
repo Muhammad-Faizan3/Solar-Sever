@@ -1716,16 +1716,11 @@ main {
 .steps-container {
   display: flex;
   align-items: stretch;
-  gap: 0;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  scrollbar-width: none;
+  gap: 20px;
+  flex-wrap: wrap;
+  overflow: visible;
   max-width: 1200px;
   margin: 0 auto;
-  transition: none;
-}
-.steps-container::-webkit-scrollbar {
-  display: none;
 }
 
 .step-card {
@@ -1734,12 +1729,10 @@ main {
   border-radius: 20px;
   padding: 24px;
   width: 100%;
-  max-width: 100%;
-  flex-shrink: 0;
   text-align: left;
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   position: relative;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 .step-card::before {
   content: "";
@@ -1789,6 +1782,8 @@ main {
   line-height: 1.6;
   color: #bbb;
   margin: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .step-img {
   margin-top: 18px;
@@ -1800,16 +1795,23 @@ main {
   display: block;
   border-radius: 12px;
   transition: transform 0.5s ease;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 .step-card:hover .step-img img {
   transform: scale(1.05);
 }
 .step-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  margin-top: 30px;
+  display: none;
+}
+@media (min-width: 768px) {
+  .step-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 30px;
+  }
 }
 .step-nav-btn {
   width: 44px;
@@ -2840,6 +2842,29 @@ main {
     font-size: 15px;
   }
 
+  /* --- Tool Modal: laptop --- */
+  #tool-modal {
+    max-width: 640px;
+    padding: 44px 48px;
+  }
+  #tool-modal-icon img {
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+  }
+  #tool-modal-title {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  #tool-modal-desc {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  #tool-modal-features li {
+    font-size: 15px;
+    padding: 12px 0 12px 30px;
+  }
+
   /* Tools: 3-column grid */
   .tools-section {
     padding: 60px 40px;
@@ -2982,6 +3007,23 @@ main {
     font-size: 52px;
   }
 
+  /* --- Tool Modal: desktop --- */
+  #tool-modal {
+    max-width: 720px;
+    padding: 50px 56px;
+  }
+  #tool-modal-icon img {
+    width: 90px;
+    height: 90px;
+    padding: 12px;
+  }
+  #tool-modal-title {
+    font-size: 34px;
+  }
+  #tool-modal-desc {
+    font-size: 17px;
+  }
+
   .tools-section {
     max-width: 1500px;
     margin: 0 auto;
@@ -3042,6 +3084,27 @@ main {
    [RESPONSIVE CHANGE 25] SMALL MOBILE TWEAKS (<= 380px)
    Catch tiny screen edge cases (iPhone SE etc)
    ============================================================ */
+@media (max-width: 480px) {
+  .step-card {
+    padding: 18px 14px;
+  }
+  .step-content h3 {
+    font-size: 16px;
+  }
+  .step-content p {
+    font-size: 13px;
+  }
+  .step-img {
+    margin-top: 12px;
+  }
+  .step-img img {
+    aspect-ratio: 4 / 3;
+  }
+  .step-num {
+    margin-bottom: 8px;
+  }
+}
+
 @media (max-width: 380px) {
   nav img {
     width: 75px;

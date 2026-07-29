@@ -1,13 +1,22 @@
 import { useState, useEffect, useRef } from 'react'
 import './Services.css'
 
+const toolIcons = [
+  'https://solarsaver.vercel.app/assets/png1-CHwXHQYP.svg',
+  'https://solarsaver.vercel.app/assets/png2-BdZxoh61.svg',
+  'https://solarsaver.vercel.app/assets/png3-DQyZYqFR.svg',
+  'https://solarsaver.vercel.app/assets/png4-DtkWNZzq.svg',
+  'https://solarsaver.vercel.app/assets/png5-BhXUQqOL.svg',
+  'https://solarsaver.vercel.app/assets/png6-K1TI4P5r.svg',
+]
+
 const toolData = [
-  { title: 'Real-Time Production Estimates', desc: 'Accurate, up-to-the-minute solar production estimates powered by real-time weather data and system specifications. Close more deals with instant, trustworthy numbers.', features: ['Real-time weather integration', 'Instant calculation engine', 'Exportable PDF reports', 'Historical production tracking'] },
-  { title: 'Minimal Training Time', desc: 'Get sales reps up to speed in record time with our streamlined training platform. Reduce ramp-up costs and start closing deals faster than ever before.', features: ['Interactive training modules', 'Role-play simulations', 'Progress tracking dashboard', 'Mobile-friendly learning'] },
-  { title: 'Homeowner-Focused Proposals', desc: 'A proposal design that communicates value clearly and drives conversions. Each layout is crafted to help homeowners understand their investment at a glance.', features: ['Visually appealing layouts', 'Simple value articulation', 'Customizable templates', 'Built-in compliance checks'] },
-  { title: 'Customizable Sales Tools', desc: 'Adaptable tools that match each representatives unique style and needs. Flexibility that empowers your team to sell with confidence and authenticity.', features: ['Personalized dashboards', 'Drag-and-drop customization', 'Team-wide sync', 'Real-time analytics'] },
-  { title: 'Quick Sales Proposals', desc: 'Generate proposals that impress customers and close deals faster. From system design to financing, get everything your client needs in minutes.', features: ['Rapid proposal generation', 'Automated system design', 'Financing integration', 'E-signature capture'] },
-  { title: 'Smart Team Management', desc: 'Keep your entire team in sync with powerful coordination features. Manage schedules, track performance, and collaborate seamlessly.', features: ['Team calendar sync', 'Performance analytics', 'Automated task assignments', 'In-app messaging'] },
+  { title: 'Real-Time Production Estimates', desc: 'Accurate, up-to-the-minute solar production estimates powered by real-time weather data and system specifications. Close more deals with instant, trustworthy numbers.', features: ['Real-time weather integration', 'Instant calculation engine', 'Exportable PDF reports', 'Historical production tracking'], icon: toolIcons[0] },
+  { title: 'Minimal Training Time', desc: 'Get sales reps up to speed in record time with our streamlined training platform. Reduce ramp-up costs and start closing deals faster than ever before.', features: ['Interactive training modules', 'Role-play simulations', 'Progress tracking dashboard', 'Mobile-friendly learning'], icon: toolIcons[1] },
+  { title: 'Homeowner-Focused Proposals', desc: 'A proposal design that communicates value clearly and drives conversions. Each layout is crafted to help homeowners understand their investment at a glance.', features: ['Visually appealing layouts', 'Simple value articulation', 'Customizable templates', 'Built-in compliance checks'], icon: toolIcons[2] },
+  { title: 'Customizable Sales Tools', desc: 'Adaptable tools that match each representatives unique style and needs. Flexibility that empowers your team to sell with confidence and authenticity.', features: ['Personalized dashboards', 'Drag-and-drop customization', 'Team-wide sync', 'Real-time analytics'], icon: toolIcons[3] },
+  { title: 'Quick Sales Proposals', desc: 'Generate proposals that impress customers and close deals faster. From system design to financing, get everything your client needs in minutes.', features: ['Rapid proposal generation', 'Automated system design', 'Financing integration', 'E-signature capture'], icon: toolIcons[4] },
+  { title: 'Smart Team Management', desc: 'Keep your entire team in sync with powerful coordination features. Manage schedules, track performance, and collaborate seamlessly.', features: ['Team calendar sync', 'Performance analytics', 'Automated task assignments', 'In-app messaging'], icon: toolIcons[5] },
 ]
 
 const aiCards = [
@@ -159,20 +168,7 @@ function Services() {
   const goToStep = i => {
     const idx = ((i % steps.length) + steps.length) % steps.length
     setCurStep(idx)
-    if (stepContainerRef.current && window.innerWidth < 768) {
-      const cardWidth = stepContainerRef.current.querySelector('.step-card')?.offsetWidth || 0
-      stepContainerRef.current.style.transform = `translateX(-${idx * cardWidth}px)`
-      stepContainerRef.current.style.transition = 'transform 0.4s ease'
-    } else if (stepContainerRef.current) {
-      stepContainerRef.current.style.transform = 'none'
-    }
   }
-
-  useEffect(() => {
-    const handleResize = () => goToStep(curStep)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [curStep])
 
   return (
     <>
@@ -224,7 +220,7 @@ function Services() {
         <div id="tool-modal-overlay" className={toolModal ? 'show' : ''} onClick={e => { if (e.target === e.currentTarget) setToolModal(null) }}>
           <div id="tool-modal">
             <span id="tool-modal-close" onClick={() => setToolModal(null)}>&times;</span>
-            <div id="tool-modal-icon"><img src="" alt="" /></div>
+            <div id="tool-modal-icon"><img src={toolModal?.icon || ''} alt="" /></div>
             <h2 id="tool-modal-title">{toolModal?.title}</h2>
             <p id="tool-modal-desc">{toolModal?.desc}</p>
             {toolModal && (
