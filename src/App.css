@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wdhyzbi.woff2) format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 /* ============================================================
    SOLAR SAVER - FULLY RESPONSIVE CSS (MOBILE FIRST APPROACH)
    Breakpoints:
@@ -18,6 +27,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Bebas Neue', sans-serif !important;
+}
+
+.fab, .fas, .far, .fa, .fa-solid, .fa-regular, .fa-brands {
+  font-family: 'Font Awesome 6 Free' !important;
+}
+.fab, .fa-brands {
+  font-family: 'Font Awesome 6 Brands' !important;
+}
+.fas, .fa-solid {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
 }
 
 html {
@@ -31,7 +52,7 @@ html {
 body {
   /* [RESPONSIVE] Dark theme match - no fixed pixel bg color variation */
   background-color: #1d1917;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #fff;
   /* [RESPONSIVE] Critical: prevent horizontal scrolling on mobile */
   overflow-x: hidden;
@@ -43,6 +64,22 @@ body {
 
 @keyframes fadeIn {
   to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(255, 122, 31, 0.3); }
+  50% { box-shadow: 0 4px 30px rgba(255, 122, 31, 0.6); }
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes borderGlow {
+  0%, 100% { border-color: #ff7a1f33; }
+  50% { border-color: #ff7a1f; }
 }
 
 /* ===== [RESPONSIVE CHANGE 2] GLOBAL IMAGE RESPONSIVENESS =====
@@ -163,118 +200,6 @@ object {
   transform: scale(1);
 }
 
-/* ============================================================
-   CALCULATOR MODAL (responsive sizing)
-   ============================================================ */
-#calculator-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 10000;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(4px);
-  padding: 15px;
-}
-#calculator-overlay.show {
-  display: flex;
-}
-#calculator-modal {
-  background: #25211f;
-  /* [RESPONSIVE] Mobile: reduced padding, fluid width */
-  padding: 28px 22px;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 420px;
-  color: #fff;
-  position: relative;
-  animation: modalIn 0.3s ease;
-  border: 1px solid #ff7a1f33;
-  max-height: 92vh;
-  overflow-y: auto;
-}
-@keyframes modalIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-#calc-close {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #ff7a1f;
-  transition: 0.3s;
-}
-#calc-close:hover {
-  color: #fff;
-  transform: rotate(90deg);
-}
-#calculator-modal h2 {
-  /* [RESPONSIVE] Mobile: smaller heading */
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-#calculator-modal h2 span {
-  color: #ff7a1f;
-}
-#calculator-modal label {
-  display: block;
-  margin: 15px 0 5px;
-  font-size: 14px;
-  color: #ccc;
-}
-#calculator-modal input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #1d1917;
-  color: #fff;
-  font-size: 16px;
-}
-#calculator-modal input:focus {
-  outline: none;
-  border-color: #ff7a1f;
-}
-#calc-btn {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  background: #ff7a1f;
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#calc-btn:hover {
-  background: #fff;
-  color: #ff7a1f;
-}
-#calc-result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #1d1917;
-  border-radius: 10px;
-  font-size: 16px;
-  text-align: center;
-  display: none;
-}
-#calc-result.show {
-  display: block;
-}
-#calc-result span {
-  color: #ff7a1f;
-  font-weight: bold;
-  font-size: 22px;
-}
 
 /* Active nav link highlight (preserved) */
 nav ul li a.active-link {
@@ -446,6 +371,7 @@ nav button {
   order: 3;
   /* [RESPONSIVE] Small touch target on mobile */
   min-height: 40px;
+  animation: glowPulse 2s ease-in-out infinite;
 }
 nav button:hover {
   background-color: white;
@@ -470,7 +396,7 @@ nav button:hover {
   /* [RESPONSIVE] Mobile: clamp() for fluid heading - grows between sizes */
   font-size: clamp(1.5rem, 5vw, 2.8rem);
   font-weight: bold;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: white;
   line-height: 1.2;
   /* Prevent large heading overflow */
@@ -514,7 +440,7 @@ nav button:hover {
 .does p {
   /* [RESPONSIVE] Mobile: smaller, readable paragraph */
   font-size: 14px;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: white;
   /* [RESPONSIVE] Mobile: add vertical spacing for readability */
   margin: 14px 0 18px;
@@ -535,6 +461,7 @@ nav button:hover {
   border: none;
   /* Touch-friendly min tap size */
   min-height: 44px;
+  animation: glowPulse 2s ease-in-out infinite;
 }
 .does button:hover {
   background-color: white;
@@ -566,9 +493,11 @@ nav button:hover {
   will-change: transform;
   background: transparent;
   display: block;
+  animation: float 6s ease-in-out infinite;
 }
 #hero-image-3d img:hover {
   box-shadow: 0 30px 80px rgba(255, 122, 31, 0.2);
+  animation-play-state: paused;
 }
 
 /* ============================================================
@@ -623,7 +552,7 @@ main {
   padding: 24px;
   border-radius: 20px;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
@@ -645,6 +574,21 @@ main {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
+.plan-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 122, 31, 0.08), transparent);
+  transform: translateX(-100%);
+  pointer-events: none;
+  border-radius: 20px;
+}
+.plan-card:hover::after {
+  animation: shimmer 0.8s ease;
+}
 .plan-card:hover::before {
   opacity: 1;
 }
@@ -653,6 +597,7 @@ main {
   transform: scale(1);
   box-shadow: 0 0 40px rgba(255, 122, 31, 0.15);
   border: 1px solid #ff7a1f44;
+  animation: borderGlow 2s ease-in-out infinite;
 }
 .plan-card.popular::before {
   opacity: 1;
@@ -800,7 +745,7 @@ main {
   max-width: 560px;
   /* [RESPONSIVE] Mobile: removed 5vw padding-left, replaced with equal horizontal padding */
   padding: 0;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: center;
 }
 .content h4 {
@@ -918,6 +863,10 @@ main {
   position: relative;
   z-index: 1;
   margin: 0 auto;
+  animation: float 7s ease-in-out infinite;
+}
+.image-box img:hover {
+  animation-play-state: paused;
 }
 .image-box img:hover {
   box-shadow: 0 30px 70px rgba(255, 122, 31, 0.2);
@@ -935,7 +884,7 @@ main {
   align-items: center;
   padding: 40px 20px;
   gap: 35px;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin-top: 1rem;
 }
 
@@ -1094,7 +1043,7 @@ main {
   color: #c8c8c8;
 }
 .right-content .highlight {
-  color: #ff9e2a;
+  color: #ff7a1f;
   font-weight: 600;
   border-left: 3px solid #ff7a1f;
   padding-left: 16px;
@@ -1107,7 +1056,7 @@ main {
 .tools-section {
   text-align: center;
   padding: 40px 18px;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: white;
   width: 100%;
   box-sizing: border-box;
@@ -1122,7 +1071,7 @@ main {
 }
 
 .tools-title span {
-  color: #ff7a00;
+  color: #ff7a1f;
 }
 
 .tools-subtitle {
@@ -1149,7 +1098,7 @@ main {
   padding: 24px;
   border-radius: 20px;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: left;
   position: relative;
   overflow: hidden;
@@ -1389,12 +1338,12 @@ main {
 
 .label.before {
   left: 14px;
-  color: #ffffff;
+  color: #fff;
 }
 
 .label.after {
   right: 14px;
-  color: #ff8800;
+  color: #ff7a1f;
 }
 
 .divider {
@@ -1403,7 +1352,7 @@ main {
   left: 50%;
   width: 3px;
   height: 100%;
-  background: #ffffff;
+  background: #fff;
   transform: translateX(-50%);
   cursor: ew-resize;
 }
@@ -1411,7 +1360,7 @@ main {
 .handle {
   width: 36px;
   height: 36px;
-  background: #ff8800;
+  background: #ff7a1f;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1422,7 +1371,7 @@ main {
   transform: translate(-50%, -50%);
   /* [RESPONSIVE] Mobile: smaller handle icon */
   font-size: 18px;
-  color: #ffffff;
+  color: #fff;
   pointer-events: none;
 }
 
@@ -1574,7 +1523,7 @@ main {
 .coverage-section {
   text-align: center;
   padding: 40px 18px;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #fff;
   width: 100%;
   box-sizing: border-box;
@@ -1725,6 +1674,7 @@ main {
   background: linear-gradient(90deg, #ff7a1f, #ffb347);
   color: #fff;
   box-shadow: 0 4px 20px rgba(255, 122, 31, 0.3);
+  animation: glowPulse 2.5s ease-in-out infinite;
 }
 .cov-btn.primary:hover {
   transform: translateY(-2px);
@@ -1749,7 +1699,7 @@ main {
   text-align: center;
   padding: 40px 18px;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   width: 100%;
   box-sizing: border-box;
 }
@@ -1765,13 +1715,17 @@ main {
 
 .steps-container {
   display: flex;
-  justify-content: center;
   align-items: stretch;
-  gap: 20px;
-  flex-wrap: wrap;
-  perspective: 1200px;
+  gap: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  scrollbar-width: none;
   max-width: 1200px;
   margin: 0 auto;
+  transition: none;
+}
+.steps-container::-webkit-scrollbar {
+  display: none;
 }
 
 .step-card {
@@ -1780,7 +1734,8 @@ main {
   border-radius: 20px;
   padding: 24px;
   width: 100%;
-  max-width: 320px;
+  max-width: 100%;
+  flex-shrink: 0;
   text-align: left;
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   position: relative;
@@ -1914,7 +1869,7 @@ main {
   text-align: center;
   padding: 40px 18px;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   width: 100%;
   box-sizing: border-box;
 }
@@ -2237,7 +2192,7 @@ main {
 }
 
 .footer-links a:hover {
-  color: #ff8c1a;
+  color: #ff7a1f;
 }
 
 .footer hr {
@@ -2282,7 +2237,7 @@ main {
 }
 
 .social-icons a {
-  color: #ff6a00;
+  color: #ff7a1f;
   font-size: 22px;
   transition: 0.3s;
   /* [RESPONSIVE] Touch-friendly target size */
@@ -2296,7 +2251,7 @@ main {
 
 .social-icons a:hover {
   transform: translateY(-4px);
-  color: #ff8c1a;
+  color: #ff7a1f;
   background: rgba(255, 122, 31, 0.08);
 }
 
@@ -2315,7 +2270,7 @@ main {
 }
 
 .developer span {
-  color: #ff7b00;
+  color: #ff7a1f;
   font-weight: 600;
   display: inline-block;
 }
@@ -2620,6 +2575,12 @@ main {
   .steps-section {
     padding: 50px 30px;
   }
+  .steps-container {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    overflow: visible;
+  }
   .steps-title {
     font-size: 48px;
     margin-bottom: 50px;
@@ -2627,6 +2588,7 @@ main {
   .step-card {
     width: calc(33.333% - 16px);
     max-width: 320px;
+    flex-shrink: initial;
     padding: 30px;
   }
   .step-num {
@@ -3126,4 +3088,41 @@ main {
     width: 36px;
     height: 36px;
   }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
 }

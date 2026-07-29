@@ -1,0 +1,91 @@
+/* ============================================================
+   BEFORE / AFTER SLIDER SECTION
+   ============================================================ */
+.before {
+  width: 100%;
+}
+
+/* [RESPONSIVE CHANGE 16] BEFORE-AFTER CONTAINER =====
+   - Mobile: reduced height, max-width prevents overflow
+   - Fluid max-width: 95vw so it never overflows viewport
+   - Height reduces via media queries for smaller screens */
+.before-after-container {
+  width: 100%;
+  max-width: 900px;
+  height: 250px;
+  margin: 10px auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #201c1b;
+}
+
+.before-after-img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.before-after-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.after-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.label {
+  position: absolute;
+  top: 14px;
+  /* [RESPONSIVE] Mobile: smaller labels */
+  font-size: clamp(0.9rem, 4vw, 1.6rem);
+  font-weight: 900;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.label.before {
+  left: 14px;
+  color: #fff;
+}
+
+.label.after {
+  right: 14px;
+  color: #ff7a1f;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+}
+
+.handle {
+  width: 36px;
+  height: 36px;
+  background: #ff7a1f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* [RESPONSIVE] Mobile: smaller handle icon */
+  font-size: 18px;
+  color: #fff;
+  pointer-events: none;
+}

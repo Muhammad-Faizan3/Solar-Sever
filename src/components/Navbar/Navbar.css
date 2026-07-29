@@ -1,0 +1,293 @@
+/* Active nav link highlight (preserved) */
+nav ul li a.active-link {
+  color: #ff7a1f;
+}
+
+/* ============================================================
+   HEADER & NAVBAR (Mobile First)
+   ============================================================ */
+header {
+  width: 100%;
+  /* [RESPONSIVE] Removed fixed 79vw height - use auto + padding for natural flow */
+  min-height: auto;
+  padding-bottom: 2rem;
+  /* Keep header from shrinking in flex container layout */
+  flex-shrink: 0;
+}
+
+/* ===== [RESPONSIVE CHANGE 4] NAVBAR - HAMBURGER MENU STYLING =====
+   - Mobile (320-767px): Hamburger visible, menu as overlay
+   - Tablet/Laptop/Desktop: Show full horizontal navigation
+   - Use flexbox for navbar layout alignment */
+nav {
+  width: 100%;
+  /* [RESPONSIVE] Removed fixed 5vw height - use min-height + padding */
+  min-height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  position: relative;
+  z-index: 1000;
+}
+
+/* [RESPONSIVE] Logo sizing - mobile smaller logo */
+nav img {
+  width: 90px;
+  height: auto;
+  /* Preserve aspect ratio: was fixed 130x100 causing distortion */
+  max-height: 60px;
+  object-fit: contain;
+}
+
+/* Sticky navbar styles (preserved, mobile-friendly) */
+header nav {
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+header nav.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(29, 25, 23, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 4px 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  min-height: 60px;
+  height: 60px;
+}
+header nav.sticky img {
+  width: 80px;
+  max-height: 50px;
+}
+
+/* ===== [RESPONSIVE CHANGE 5] HAMBURGER ICON STYLES =====
+   - Displayed by default on mobile
+   - Three animated bars with X transform when active
+   - Inserted into DOM via app.js, styled here for maintainability */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px 8px;
+  z-index: 1001;
+  order: 2;
+}
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: #fff;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  display: block;
+}
+/* Hamburger active state - animate bars into an X */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ===== [RESPONSIVE CHANGE 6] NAV UL - MOBILE OVERLAY MENU =====
+   - Mobile: full-width dropdown under nav, column layout
+   - Default hidden, shown with .show class via JS */
+ul {
+  /* [RESPONSIVE] Mobile: defaults to off-canvas dropdown layout */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  list-style: none;
+  background: #1d1917;
+  padding: 15px 20px;
+  gap: 0;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 122, 31, 0.2);
+}
+ul.show {
+  display: flex;
+  /* Subtle slide-down animation for mobile menu open */
+  animation: menuSlide 0.25s ease forwards;
+}
+@keyframes menuSlide {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ul li {
+  /* [RESPONSIVE] Mobile: full width clickable rows */
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+ul li:last-child {
+  border-bottom: none;
+}
+ul a {
+  font: bold 1em sans-serif;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.2s;
+  /* [RESPONSIVE] Mobile: full-width clickable area for touch friendliness */
+  display: block;
+  padding: 14px 4px;
+  font-size: 16px;
+}
+ul a:hover {
+  color: #ff7a1f;
+}
+
+/* [RESPONSIVE CHANGE 7] NAV BUTTON - MOBILE FIRST =====
+   - Mobile: smaller, flexible sizing, removed fixed vw dimensions
+   - Fixed 10vw/5vh caused distorted button sizing */
+nav button {
+  /* [RESPONSIVE] Mobile: fluid button, no fixed vw dimensions */
+  width: auto;
+  min-width: 130px;
+  height: auto;
+  padding: 10px 16px;
+  background-color: #ff7a1f;
+  color: white;
+  border-radius: 100px;
+  font: bold 14px sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  order: 3;
+  /* [RESPONSIVE] Small touch target on mobile */
+  min-height: 40px;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+nav button:hover {
+  background-color: white;
+  color: #ff7a1f;
+}
+
+/* ===== Tablet (min-width: 768px) ===== */
+@media (min-width: 768px) {
+
+  /* --- Navbar: Show horizontal nav links, hide hamburger --- */
+  .hamburger {
+    display: none !important;
+    order: unset;
+  }
+  nav {
+    padding: 12px 30px;
+    min-height: 70px;
+  }
+  nav img {
+    width: 110px;
+    max-height: 70px;
+  }
+  header nav.sticky {
+    padding: 4px 30px;
+    height: 70px;
+  }
+  header nav.sticky img {
+    width: 90px;
+    max-height: 60px;
+  }
+  ul {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    min-width: 420px;
+    background: transparent;
+    padding: 0;
+    gap: 22px;
+    z-index: auto;
+    box-shadow: none;
+    border-top: none;
+    order: 2;
+    animation: none;
+  }
+  ul li {
+    border-bottom: none;
+    width: auto;
+  }
+  ul a {
+    padding: 6px 2px;
+    font-size: 14px;
+    display: inline-block;
+    width: auto;
+  }
+  nav button {
+    order: 3;
+    min-width: 150px;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+
+/* ===== Laptop (min-width: 1024px) ===== */
+@media (min-width: 1024px) {
+
+  nav {
+    padding: 12px 50px;
+  }
+  header nav.sticky {
+    padding: 0 50px;
+  }
+  nav img {
+    width: 130px;
+  }
+  ul {
+    min-width: 480px;
+    gap: 28px;
+  }
+  ul a {
+    font-size: 15px;
+  }
+}
+
+/* ===== Desktop (min-width: 1440px) ===== */
+@media (min-width: 1440px) {
+
+  nav {
+    padding: 12px 80px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  header nav.sticky {
+    padding: 0 80px;
+  }
+}
+
+/* ===== Small Mobile (max-width: 380px) ===== */
+@media (max-width: 380px) {
+  nav img {
+    width: 75px;
+    max-height: 50px;
+  }
+  nav button {
+    min-width: 110px;
+    padding: 9px 12px;
+    font-size: 12px;
+    min-height: 38px;
+  }
+  .hamburger span {
+    width: 22px;
+    margin: 2px 0;
+  }
+}
+
+/* glowPulse keyframes (used by nav button) */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(255, 122, 31, 0.3); }
+  50% { box-shadow: 0 4px 30px rgba(255, 122, 31, 0.6); }
+}
